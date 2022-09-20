@@ -1,0 +1,12 @@
+{
+  "/api/*": {
+      "target": "https://www.dongabank.com.vn",
+      "secure": false,
+      "logLevel": "debug"
+  },
+  "App": {
+    "SelfUrl": "https://www.dongabank.com.vn",
+    "CorsOrigins": "https://www.dongabank.com.vn,http://localhost:4200"
+  }
+}
+

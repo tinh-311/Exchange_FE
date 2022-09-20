@@ -69,7 +69,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "exchange_rate:build:production"
+              "browserTarget": "exchange_rate:build:production",
+              "proxyConfig": "src/proxy.conf.json"
             },
             "development": {
               "browserTarget": "exchange_rate:build:development"
@@ -103,5 +104,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b059383e-6af2-4c13-95dc-e50a01db1e91"
   }
 }
