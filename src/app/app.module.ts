@@ -16,6 +16,7 @@ import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ScrollTopModule} from 'primeng/scrolltop';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ScrollTopModule} from 'primeng/scrolltop';
     TableModule,
     ToolbarModule,
     ProgressSpinnerModule,
-    ScrollTopModule
+    ScrollTopModule,
+    TooltipModule
   ],
   bootstrap: [AppComponent]
 })

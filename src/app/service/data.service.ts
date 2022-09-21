@@ -27,7 +27,7 @@ export class DataService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-RapidAPI-Key': '1e845a648fmsha839b865568f6b1p100fdejsn860bb71c70b8',
+        'X-RapidAPI-Key': 'bbe15b8d3amshe8ed9aa76acdf18p1a2ffdjsn38b99c07bec7',
         'X-RapidAPI-Host': 'currency-converter-pro1.p.rapidapi.com'
       }),
       params: params,

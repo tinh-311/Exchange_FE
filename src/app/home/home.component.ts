@@ -34,9 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dataService.getExchange().then(vals => {
       vals.forEach((exchange) => {
         this.dataService.puttExchange(exchange)
-        .subscribe(res => {
-          console.log('Update Exchange:', res);
-        });
+        .subscribe();
       })
 
 
@@ -57,7 +55,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if(a.from > b.from) { return 1; }
         return 0;
       });
-      this.isLoading = false;
     })
     .catch(err => {
       console.log(err);
@@ -146,6 +143,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
         ob = CURRENCY.UsdToVND.name;
         break;
       }
+      case CURRENCY.LakToVND.from: {
+        ob = CURRENCY.LakToVND.name;
+        break;
+      }
+      case CURRENCY.KhrToVND.from: {
+        ob = CURRENCY.KhrToVND.name;
+        break;
+      }
+      case CURRENCY.NzdToVND.from: {
+        ob = CURRENCY.NzdToVND.name;
+        break;
+      }
+      case CURRENCY.PhpToVND.from: {
+        ob = CURRENCY.PhpToVND.name;
+        break;
+      }
+      case CURRENCY.TwdToVND.from: {
+        ob = CURRENCY.TwdToVND.name;
+        break;
+      }
     }
     return ob;
   }
@@ -232,6 +249,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
         ob = CURRENCY.UsdToVND.flag_src;
         break;
       }
+
+      case CURRENCY.LakToVND.from: {
+        ob = CURRENCY.LakToVND.flag_src;
+        break;
+      }
+      case CURRENCY.KhrToVND.from: {
+        ob = CURRENCY.KhrToVND.flag_src;
+        break;
+      }
+      case CURRENCY.NzdToVND.from: {
+        ob = CURRENCY.NzdToVND.flag_src;
+        break;
+      }
+      case CURRENCY.PhpToVND.from: {
+        ob = CURRENCY.PhpToVND.flag_src;
+        break;
+      }
+      case CURRENCY.TwdToVND.from: {
+        ob = CURRENCY.TwdToVND.flag_src;
+        break;
+      }
     }
     return ob;
   }
@@ -240,9 +278,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return new Date(ob);
   }
 
-  async syncExchange() {
+  syncExchange() {
     this.isLoading = true;
-    const response = await this.getExchangeRateAndPut();
-    this.isLoading = false;
+    this.getExchangeRateAndPut();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 10000)
   }
 }
