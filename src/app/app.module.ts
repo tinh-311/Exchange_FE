@@ -10,6 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {ToolbarModule} from 'primeng/toolbar';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ScrollTopModule} from 'primeng/scrolltop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +27,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ButtonModule,
+    TableModule,
+    ToolbarModule,
+    ProgressSpinnerModule,
+    ScrollTopModule
   ],
   bootstrap: [AppComponent]
 })

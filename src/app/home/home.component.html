@@ -1,0 +1,45 @@
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <div class="d_flex">
+      <h2 class="p-m-0" style="margin-right: 20px;">Exchange Rate</h2>
+      <button *ngIf="!isLoading" (click)="syncExchange()"pButton pRipple type="button" icon="pi pi-sync" class="p-button-rounded p-button-info p-button-text"></button>
+      <p-progressSpinner *ngIf="isLoading" [style]="{width: '30px', height: '30px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    </div>
+    <span class="dateUpdate"> <span class="title"> Updated at: </span> {{ timeUpdate | date:'medium' }} </span>
+  </p-toolbar>
+
+  <p-table
+    #dt
+    [value]="exchanges"
+    [rows]="15"
+    [paginator]="true"
+    [rowHover]="true"
+    dataKey="from"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="from">
+          <strong>Currency Code</strong> <p-sortIcon field="from"></p-sortIcon>
+        </th>
+        <th>
+          <strong>Currency Name</strong>
+        </th>
+        <th class="d_flex" pSortableColumn="result">
+          <img src="assets/png/vnd.png" alt="" srcset="">
+          <strong>VND</strong> <p-sortIcon field="result"></p-sortIcon>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-exchange>
+      <tr>
+        <td class="d_flex">
+          <img [src]="getFlagSrc(exchange.from)" alt="" srcset="">
+          <div> {{ exchange.from }} </div>
+        </td>
+        <td>{{ getNameExchangeRate(exchange.from) |  titlecase }}</td>
+        <td>{{ exchange.result | currency:'VND' }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-scrollTop [threshold]="200"></p-scrollTop>
+</div>

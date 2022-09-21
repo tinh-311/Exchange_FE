@@ -1,0 +1,39 @@
+.d_flex {
+  display: flex;
+  align-items: center;
+}
+
+img {
+  display: block;
+  margin-right: 18px;
+  width: 40px;
+  height: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.dateUpdate {
+  font-size: 14px;
+  font-style: oblique;
+
+  .title {
+    font-weight: 500;
+  }
+}
+
+@keyframes p-progress-spinner-color {
+  100%,
+  0% {
+      stroke: #d62d20;
+  }
+  40% {
+      stroke: #0057e7;
+  }
+  66% {
+      stroke: #008744;
+  }
+  80%,
+  90% {
+      stroke: #ffa700;
+  }
+}
+

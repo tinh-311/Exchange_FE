@@ -27,7 +27,7 @@ export class DataService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-RapidAPI-Key': 'a3fa9372ffmshb5af8e60656a483p1866e2jsncb80e7e2cab4',
+        'X-RapidAPI-Key': '1e845a648fmsha839b865568f6b1p100fdejsn860bb71c70b8',
         'X-RapidAPI-Host': 'currency-converter-pro1.p.rapidapi.com'
       }),
       params: params,
@@ -76,12 +76,22 @@ export class DataService {
     })
   }
 
+  public getAllExchangeFormDB() {
+    let data: any = [];
+    return new Promise((resolve, reject) => {
+      this.getExchangeFromDB().subscribe(res => {
+          data = res;
+          resolve(data);
+      })
+    })
+  }
+
   // DB
-  public getExchangeFromDB() {
+  public getExchangeFromDB(): Observable<Exchange> {
     return this.httpClient.get<Exchange>(`https://exchangenodejs.herokuapp.com/exchange`, this.httpOptions);
   }
 
-  public getExchangeByIdFromDB(id: any) {
+  public getExchangeByIdFromDB(id: any): Observable<Exchange> {
     return this.httpClient.get<Exchange>(`https://exchangenodejs.herokuapp.com/exchange/${id}`, this.httpOptions);
   }
 }
