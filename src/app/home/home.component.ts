@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { Exchange } from '../model/exchange.model';
 import { DataService } from '../service/data.service';
@@ -8,31 +8,45 @@ import { DataService } from '../service/data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   exchanges: Exchange[] = [];
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    // this.getExchangeRateAndPut();
+    this.getExchangeRate();
+  }
 
   ngOnInit(): void {
-    this.dataService.getExchange().then(val => {
-      this.exchanges = val;
+    setInterval(() => {
+      // this.getExchangeRateAndPut();
+    }, 10000);
+  }
+
+  ngAfterViewInit() {
+
+  }
+
+  getExchangeRateAndPut() {
+    this.dataService.getExchange().then(vals => {
+      this.exchanges = vals;
+      this.exchanges.forEach((exchange) => {
+        this.dataService.puttExchange(exchange)
+        .subscribe(res => {
+          console.log('Update Exchange:', res);
+        });
+      })
     })
-    console.log('🚀 ~ this.exchanges', this.exchanges);
-    this.exchanges.forEach((exchange) => {
-      this.dataService.puttExchange(exchange)
-      .subscribe(res => {
-        console.log('🚀 ~ res', res);
-      });
+    .catch(err => {
+      console.log(err);
     })
   }
 
-  test() {
-    this.exchanges.forEach((exchange) => {
-      this.dataService.puttExchange(exchange)
-      .subscribe(res => {
-        console.log('🚀 ~ res', res);
-      });
+  getExchangeRate() {
+    this.dataService.getExchange().then(vals => {
+      this.exchanges = vals;
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
-
 }
