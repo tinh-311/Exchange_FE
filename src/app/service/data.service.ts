@@ -46,7 +46,7 @@ export class DataService {
   public mappingData(ob: any): Exchange {
     const meta = ob?.meta;
     const request = ob?.request;
-    const result = ob?.result;
+    const result = meta?.rates?.from;
     let res: Exchange = {
       from: request?.from,
       to: request?.to,
