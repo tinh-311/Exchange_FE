@@ -27,3 +27,13 @@ img {
 .ex_rate {
   margin-right: 20px;
 }
+
+@media screen and (max-width: 520px) {
+  .hidden_filter {
+    display: none;
+  }
+
+  .show {
+    display: table-row !important;
+  }
+}

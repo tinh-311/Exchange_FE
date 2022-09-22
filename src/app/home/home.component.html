@@ -46,19 +46,30 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th pSortableColumn="from">
-          <strong>Currency Code</strong>
+        <th class="header_table" pSortableColumn="from">
+          <strong>Code</strong>
           <p-sortIcon field="from"></p-sortIcon>
+          <p-columnFilter class="hidden_filter" type="text" field="from" display="menu"></p-columnFilter>
+        </th>
+        <th class="header_table" pSortableColumn="name">
+          <strong>Name</strong>
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter class="hidden_filter" type="text" field="name" display="menu"></p-columnFilter>
+        </th>
+        <th class="d_flex header_table" pSortableColumn="result">
+          <img src="assets/png/vnd.png" alt="" srcset="">
+          <strong>VND</strong>
+          <p-sortIcon field="result"></p-sortIcon>
+        </th>
+      </tr>
+      <tr class="show" style="display: none;">
+        <th>
           <p-columnFilter type="text" field="from" display="menu"></p-columnFilter>
         </th>
-        <th pSortableColumn="name">
-          <strong>Currency Name</strong>
-          <p-sortIcon field="name"></p-sortIcon>
+        <th>
           <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
         </th>
-        <th class="d_flex" pSortableColumn="result">
-          <img src="assets/png/vnd.png" alt="" srcset="">
-          <strong>VND</strong> <p-sortIcon field="result"></p-sortIcon>
+        <th>
         </th>
       </tr>
     </ng-template>

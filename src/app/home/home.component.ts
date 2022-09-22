@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private dataService: DataService) {
     this.getExchangeRate();
-    this.getExchangeRateAndPut(); // Sync Exchange from API
+    // this.getExchangeRateAndPut(); // Sync Exchange from API
   }
 
   ngOnInit(): void {
