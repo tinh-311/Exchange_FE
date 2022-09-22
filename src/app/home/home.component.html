@@ -46,7 +46,7 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th class="header_table" pSortableColumn="from">
+        <th class="header_table col_code" pSortableColumn="from">
           <strong>Code</strong>
           <p-sortIcon field="from"></p-sortIcon>
           <p-columnFilter class="hidden_filter" type="text" field="from" display="menu"></p-columnFilter>
@@ -75,7 +75,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-exchange>
       <tr>
-        <td class="d_flex">
+        <td class="d_flex currency_code">
           <img [src]="getFlagSrc(exchange?.from)" alt="" srcset="">
           <div> {{ exchange?.from }} </div>
         </td>

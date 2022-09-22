@@ -36,4 +36,17 @@ img {
   .show {
     display: table-row !important;
   }
+
+  img {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .currency_code {
+    display: table-cell;
+  }
+
+  .col_code {
+    width: 150px;
+  }
 }
