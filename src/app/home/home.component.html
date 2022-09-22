@@ -41,8 +41,6 @@
     [rowHover]="true"
     dataKey="from"
     responsiveLayout="scroll"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -60,6 +58,7 @@
           <img src="assets/png/vnd.png" alt="" srcset="">
           <strong>VND</strong>
           <p-sortIcon field="result"></p-sortIcon>
+          <p-columnFilter class="hidden_filter" type="numeric" field="result" display="menu"></p-columnFilter>
         </th>
       </tr>
       <tr class="show" style="display: none;">
@@ -70,6 +69,7 @@
           <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
         </th>
         <th>
+          <p-columnFilter class="col_l_filter" type="numeric" field="result" display="menu"></p-columnFilter>
         </th>
       </tr>
     </ng-template>
@@ -83,6 +83,11 @@
         <td>{{ exchange?.result | currency:'VND':'symbol-narrow':'.2-2' }}</td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+      <div class="total_entries">
+          In total there are {{exchanges ? exchanges.length : 0 }} entries
+      </div>
+  </ng-template>
   </p-table>
   <p-scrollTop [threshold]="200"></p-scrollTop>
 </div>

@@ -28,6 +28,14 @@ img {
   margin-right: 20px;
 }
 
+.total_entries {
+  display: flex;
+  justify-content: center;
+  font-style: oblique;
+  font-size: 15px;
+  font-weight: 400;
+}
+
 @media screen and (max-width: 520px) {
   .hidden_filter {
     display: none;

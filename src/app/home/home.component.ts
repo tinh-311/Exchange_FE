@@ -295,8 +295,4 @@ export class HomeComponent implements OnInit {
   clear(table: Table) {
     table.clear();
   }
-
-  exportExcel() {
-
-  }
 }
