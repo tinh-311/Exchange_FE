@@ -1,11 +1,36 @@
 <div class="card">
   <p-toolbar styleClass="p-mb-4">
     <div class="d_flex">
-      <h2 class="p-m-0" style="margin-right: 20px;">Exchange Rate</h2>
-      <button pTooltip="Sync All Exchange rate"  *ngIf="!isLoading" (click)="syncExchange()"pButton pRipple type="button" icon="pi pi-sync" class="p-button-rounded p-button-info p-button-text"></button>
-      <p-progressSpinner *ngIf="isLoading" [style]="{width: '30px', height: '30px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+      <h2 class="p-m-0 ex_rate">Exchange Rate</h2>
+      <button
+        pTooltip="Sync All Exchange rate"
+        *ngIf="!isLoading"
+        (click)="syncExchange()"
+        pButton pRipple
+        type="button"
+        icon="pi pi-sync"
+        class="p-button-rounded p-button-info p-button-text">
+      </button>
+      <p-progressSpinner
+        *ngIf="isLoading"
+        [style]="{width: '30px', height: '30px'}"
+        styleClass="custom-spinner"
+        strokeWidth="8"
+        fill="var(--surface-ground)"
+        animationDuration=".5s">
+      </p-progressSpinner>
+      <button
+        pButton
+        label="Clear"
+        class="p-button-rounded p-button-success p-button-text"
+        icon="pi pi-filter-slash"
+        pTooltip="Clear All Filter And Sort"
+        (click)="clear(dt)">
+      </button>
     </div>
-    <span class="dateUpdate"> <span class="title"> Updated at: </span> {{ timeUpdate | date:'medium' }} </span>
+    <span class="dateUpdate">
+      <span class="title"> Updated at: </span> {{ timeUpdate | date:'medium' }}
+    </span>
   </p-toolbar>
 
   <p-table
@@ -15,15 +40,21 @@
     [paginator]="true"
     [rowHover]="true"
     dataKey="from"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true"
+    responsiveLayout="scroll"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
   >
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="from">
-          <strong>Currency Code</strong> <p-sortIcon field="from"></p-sortIcon>
+          <strong>Currency Code</strong>
+          <p-sortIcon field="from"></p-sortIcon>
+          <p-columnFilter type="text" field="from" display="menu"></p-columnFilter>
         </th>
-        <th>
+        <th pSortableColumn="name">
           <strong>Currency Name</strong>
+          <p-sortIcon field="name"></p-sortIcon>
+          <p-columnFilter type="text" field="name" display="menu"></p-columnFilter>
         </th>
         <th class="d_flex" pSortableColumn="result">
           <img src="assets/png/vnd.png" alt="" srcset="">
@@ -34,11 +65,11 @@
     <ng-template pTemplate="body" let-exchange>
       <tr>
         <td class="d_flex">
-          <img [src]="getFlagSrc(exchange.from)" alt="" srcset="">
-          <div> {{ exchange.from }} </div>
+          <img [src]="getFlagSrc(exchange?.from)" alt="" srcset="">
+          <div> {{ exchange?.from }} </div>
         </td>
-        <td>{{ getNameExchangeRate(exchange.from) |  titlecase }}</td>
-        <td>{{ exchange.result | currency:'VND':'symbol-narrow':'.2-2' }}</td>
+        <td>{{ exchange?.name |  titlecase }}</td>
+        <td>{{ exchange?.result | currency:'VND':'symbol-narrow':'.2-2' }}</td>
       </tr>
     </ng-template>
   </p-table>

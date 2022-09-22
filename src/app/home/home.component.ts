@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { combineLatest } from 'rxjs';
 import { CURRENCY } from '../constants/currency.constants';
 import { Exchange } from '../model/exchange.model';
@@ -9,14 +10,14 @@ import { DataService } from '../service/data.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   exchanges: Exchange[] = [];
   timeUpdate: number = 0;
   isLoading: boolean = false;
 
   constructor(private dataService: DataService) {
-    // this.getExchangeRateAndPut(); // Sync Exchange from API
     this.getExchangeRate();
+    this.getExchangeRateAndPut(); // Sync Exchange from API
   }
 
   ngOnInit(): void {
@@ -26,18 +27,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // }, 3600000);
   }
 
-  ngAfterViewInit() {
-
-  }
-
   getExchangeRateAndPut() {
     this.dataService.getExchange().then(vals => {
       vals.forEach((exchange) => {
         this.dataService.puttExchange(exchange)
-        .subscribe();
+        .subscribe(res => {
+          this.timeUpdate = vals[0].dateTime;
+        });
       })
-
-
       this.getExchangeRate();
     })
     .catch(err => {
@@ -55,9 +52,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if(a.from > b.from) { return 1; }
         return 0;
       });
+      this.convertData(this.exchanges);
     })
     .catch(err => {
       console.log(err);
+    })
+  }
+
+  convertData(exchanges: Exchange[]) {
+    let dataGrid: any[] = [];
+    dataGrid = exchanges;
+    dataGrid.forEach(item => {
+      item.name = this.getNameExchangeRate(item.from);
     })
   }
 
@@ -284,5 +290,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.isLoading = false;
     }, 10000)
+  }
+
+  clear(table: Table) {
+    table.clear();
+  }
+
+  exportExcel() {
+
   }
 }
