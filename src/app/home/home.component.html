@@ -15,7 +15,7 @@
         *ngIf="isLoading"
         [style]="{width: '30px', height: '30px'}"
         styleClass="custom-spinner"
-        strokeWidth="8"
+        strokeWidth="6"
         fill="var(--surface-ground)"
         animationDuration=".5s">
       </p-progressSpinner>
@@ -24,7 +24,7 @@
         label="Clear"
         class="p-button-rounded p-button-success p-button-text"
         icon="pi pi-filter-slash"
-        pTooltip="Clear All Filter And Sort"
+        pTooltip="Clear All Filter"
         (click)="clear(dt)">
       </button>
     </div>
@@ -44,17 +44,17 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th class="header_table col_code" pSortableColumn="from">
+        <th pTooltip="Currency Code" tooltipPosition="bottom"  class="header_table col_code" pSortableColumn="from">
           <strong>Code</strong>
           <p-sortIcon field="from"></p-sortIcon>
           <p-columnFilter class="hidden_filter" type="text" field="from" display="menu"></p-columnFilter>
         </th>
-        <th class="header_table" pSortableColumn="name">
+        <th pTooltip="Currency Name" tooltipPosition="bottom"  class="header_table" pSortableColumn="name">
           <strong>Name</strong>
           <p-sortIcon field="name"></p-sortIcon>
           <p-columnFilter class="hidden_filter" type="text" field="name" display="menu"></p-columnFilter>
         </th>
-        <th class="d_flex header_table" pSortableColumn="result">
+        <th pTooltip="Viet Nam Dong" tooltipPosition="bottom"  class="d_flex header_table" pSortableColumn="result">
           <img src="assets/png/vnd.png" alt="" srcset="">
           <strong>VND</strong>
           <p-sortIcon field="result"></p-sortIcon>
@@ -85,9 +85,10 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <div class="total_entries">
-          In total there are {{exchanges ? exchanges.length : 0 }} entries
+        In total there are {{ dt.totalRecords }} entries
       </div>
   </ng-template>
   </p-table>
   <p-scrollTop [threshold]="200"></p-scrollTop>
 </div>
+<p-toast position="bottom-right"></p-toast>

@@ -3,7 +3,9 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { combineLatest, forkJoin, map, Observable, switchMap } from 'rxjs';
 import { Exchange } from './../model/exchange.model';
-import { CURRENCY } from '../constants/currency.constants'
+import { CURRENCY } from '../constants/currency.constant'
+import { API_KEY } from '../constants/keyApi.constant';
+import { Exchange_helperService } from './exchange_helper.service';
 
 
 @Injectable({
@@ -12,7 +14,7 @@ import { CURRENCY } from '../constants/currency.constants'
 export class DataService {
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private exchange_helperService: Exchange_helperService,) { }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -27,7 +29,7 @@ export class DataService {
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-RapidAPI-Key': 'b4b2bd4cc2msha3c1c2fe80d1828p19c6b8jsn87e3d4652347',
+        'X-RapidAPI-Key': API_KEY.KEY_3,
         'X-RapidAPI-Host': 'currency-converter-pro1.p.rapidapi.com'
       }),
       params: params,
@@ -77,18 +79,25 @@ export class DataService {
   }
 
   public getAllExchangeFormDB() {
-    let data: any = [];
     return new Promise((resolve, reject) => {
       this.getExchangeFromDB().subscribe(res => {
+          let data: any[];
           data = res;
+          data.forEach(item => {
+            item.name = this.getNameExchangeRate(item.from);
+          })
           resolve(data);
       })
     })
   }
 
+  getNameExchangeRate(ob: any): string {
+    return this.exchange_helperService.getNameExchangeRate(ob);
+  }
+
   // DB
-  public getExchangeFromDB(): Observable<Exchange> {
-    return this.httpClient.get<Exchange>(`https://exchangenodejs.herokuapp.com/exchange`, this.httpOptions);
+  public getExchangeFromDB(): Observable<Exchange[]> {
+    return this.httpClient.get<Exchange[]>(`https://exchangenodejs.herokuapp.com/exchange`, this.httpOptions);
   }
 
   public getExchangeByIdFromDB(id: any): Observable<Exchange> {

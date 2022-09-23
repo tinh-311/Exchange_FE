@@ -17,6 +17,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ScrollTopModule} from 'primeng/scrolltop';
 import {TooltipModule} from 'primeng/tooltip';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {TooltipModule} from 'primeng/tooltip';
     ToolbarModule,
     ProgressSpinnerModule,
     ScrollTopModule,
-    TooltipModule
+    TooltipModule,
+    ToastModule
   ],
   bootstrap: [AppComponent]
 })
